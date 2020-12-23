@@ -1,0 +1,15 @@
+// 定义扩展属性
+ext {
+    // 这里的android就是一个map，里面都是key-value，这是groovy语法
+    android = [
+            compileSdkVersion        : 30,
+            libAppCompat             : 'androidx.appcompat:appcompat:1.2.0',
+            buildToolsVersion        : "30.0.2",
+            applicationId            : "com.example.myapplication",
+            minSdkVersion            : 16,
+            targetSdkVersion         : 27,
+            versionCode              : 1,
+            versionName              : "1.0",
+            testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner"
+    ]
+}

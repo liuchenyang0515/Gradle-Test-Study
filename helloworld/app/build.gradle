@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+
+//def mCompileSdkVersion = 30
+//def libAppCompat = 'androidx.appcompat:appcompat:1.2.0'
+
+
+
+
+android {
+    // ext扩展属性.android区块(map).key值
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner rootProject.ext.android.testInstrumentationRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    // 后面的字符串都能改到ext里面去，我懒得改了
+    implementation rootProject.ext.android.libAppCompat
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+}
+
+// 获取父project
+getParentProject()
+def getParentProject() {
+    def name = this.getParent().name;
+    println "the parent project name is: ${name}"
+}
+getRootPro()
+def getRootPro() {
+    def name = this.getRootProject().name;
+    println "the root project name is: ${name}"
+}

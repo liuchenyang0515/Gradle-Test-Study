@@ -1,0 +1,69 @@
+// 引入定义的扩展属性，减少根project代码量，使之更加模块化
+apply from: this.file('common.gradle')
+
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.1"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+this.afterEvaluate {
+    println('配置阶段执行完毕...')
+}
+
+this.gradle.buildFinished {
+    println '执行阶段执行完毕...'
+}
+/**
+ * project相关api讲解
+ */
+this.getProjects()
+
+def getProjects() {
+    println '---------------'
+    println 'Root Project'
+    println '---------------'
+    this.getAllprojects().eachWithIndex { Project project, int index ->
+//        if(index == 0) {
+//            println "Root project: '${project.name}'"
+//        } else {
+        println "------project: '${project.name}'"
+//        }
+    }
+}
+
+project('app') { Project project ->
+    // 这里project代表找到的'app'
+    println project.name
+    apply plugin: 'com.android.application'
+
+    dependencies {}
+    android {
+
+    }
+}
+
+allprojects {
+    group 'com.meme'
+    version('1.0.0-release')
+}
+
